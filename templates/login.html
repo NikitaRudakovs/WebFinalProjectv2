@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login</title>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        overflow: hidden; 
+    }
+
+    #loading-overlay {
+        position: fixed;
+        z-index: 9999;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease;
+    }
+    .spinner {
+        border: 8px solid #f3f3f3; 
+        border-top: 8px solid #c1a400; 
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .loaded #loading-overlay {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .top-bar, .bottom-bar {
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        background: #6d5d00; 
+        z-index: 10;
+    }
+    .top-bar { top: 0; left: 0; }
+    .bottom-bar { bottom: 0; left: 0; }
+
+    .background-container {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('static/LoginPic.webp') no-repeat center center/cover;
+        filter: blur(2px);
+        z-index: -2;
+    }
+    .gradient-overlay {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 90%);
+        z-index: -1;
+    }
+
+    /* Content Container */
+    .content-container {
+        position: relative;
+        z-index: 20;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        box-sizing: border-box;
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .logo {
+        color: #fff;
+        font-size: 2rem;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    /* Login Box */
+    .login-box {
+        background: rgba(255,255,255,0.8);
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .login-box h1 {
+        margin: 0 0 20px 0;
+        font-size: 1.5rem;
+        text-align: center;
+        color: #333;
+    }
+    .login-box label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+        font-weight: bold;
+    }
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: #fff;
+        color: #333;
+    }
+    .login-box input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background: #6d5d00;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+    .login-box input[type="submit"]:hover {
+        background: #6d5d00;
+    }
+</style>
+</head>
+<body>
+<div id="loading-overlay">
+    <div class="spinner"></div>
+</div>
+
+<div class="top-bar"></div>
+<div class="bottom-bar"></div>
+
+<div class="background-container"></div>
+<div class="gradient-overlay"></div>
+
+<div class="content-container">
+    <div class="logo">Super Taxi</div>
+    <div class="login-box">
+        <h1>Login</h1>
+        <form method="POST">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+
+<script>
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.overflow = 'auto';
+    }, 1000);
+});
+</script>
+</body>
+</html>
